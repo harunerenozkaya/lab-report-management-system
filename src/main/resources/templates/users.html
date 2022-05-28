@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>Users</title>
+</head>
+
+<body>
+<div>
+    <h2>Users</h2>
+    <table>
+        <tr>
+            <th>userId</th>
+            <th>userName</th>
+            <th>userSurname</th>
+            <th>isManager</th>
+        </tr>
+        <tr th:each="c : ${usersList}">
+            <td>
+                <a th:href="@{${'user/' + c.getUserId()}}" th:text="${c.getUserId()}"></a>
+            </td>
+            <td th:text="${c.getUserName()}"></td>
+            <td th:text="${c.getUserSurname()}"></td>
+            <td th:text="${c.getIsManager()}"></td>
+        </tr>
+    </table>
+    <p>
+        <a href="/">Home</a>
+    </p>
+    <button type="button" > <a th:href="@{${'addUser/' + 'true'}}">Add User (as Manager)</a></button>
+    <button type="button" > <a th:href="@{${'addUser/' + 'false'}}">Add User (as Laborant)</a></button>
+</div>
+</body>
+</html>

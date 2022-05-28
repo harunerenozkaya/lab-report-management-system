@@ -1,0 +1,28 @@
+<html>
+<head>
+    <title>Users</title>
+</head>
+
+<body>
+<div>
+    <h2>Users</h2>
+    <table>
+        <tr>
+            <th>userId</th>
+            <th>userName</th>
+            <th>userSurname</th>
+            <th>isManager</th>
+        </tr>
+        <tr>
+            <td th:text="${user.getUserId()}"></td>
+            <td th:text="${user.getUserName()}"></td>
+            <td th:text="${user.getUserSurname()}"></td>
+            <td th:text="${user.getIsManager()}"></td>
+        </tr>
+    </table>
+    <p>
+        <a href="/">Home</a>
+    </p>
+</div>
+</body>
+</html>
