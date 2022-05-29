@@ -7,5 +7,7 @@ import java.util.List;
 public interface IUserService {
     List<User> getAllUsers();
     User getSingleUser(Long userId);
+    boolean isUserPresent(Long userId);
     Long addUser(User user);
+
 }

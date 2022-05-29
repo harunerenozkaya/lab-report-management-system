@@ -19,6 +19,11 @@ public class UserService implements IUserService{
     }
 
     @Override
+    public boolean isUserPresent(Long userId) {
+        return repository.existsById(userId);
+    }
+
+    @Override
     public User getSingleUser(Long userId) {
         return repository.findById(userId).get();
     }

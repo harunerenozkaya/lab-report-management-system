@@ -5,7 +5,7 @@
 
 <body>
 <div>
-    <h2>Users</h2>
+    <h2 th:text="${user.getUserName()}"></h2>
     <table>
         <tr>
             <th>userId</th>
@@ -20,9 +20,6 @@
             <td th:text="${user.getIsManager()}"></td>
         </tr>
     </table>
-    <p>
-        <a href="/">Home</a>
-    </p>
 </div>
 </body>
 </html>

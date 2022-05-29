@@ -1,6 +1,8 @@
 <html>
 <head>
     <title>Users</title>
+    <script type="text/javascript" src="/scripts/directAddUser.js"></script>
+    <script type="text/javascript" src="/scripts/exitSystem.js"></script>
 </head>
 
 <body>
@@ -22,11 +24,8 @@
             <td th:text="${c.getIsManager()}"></td>
         </tr>
     </table>
-    <p>
-        <a href="/">Home</a>
-    </p>
-    <button type="button" > <a th:href="@{${'addUser/' + 'true'}}">Add User (as Manager)</a></button>
-    <button type="button" > <a th:href="@{${'addUser/' + 'false'}}">Add User (as Laborant)</a></button>
+    <input type="button" onclick="exitSystem()" value="Exit">
+    <input type="button" onclick="directAddUser()" value="Add User">
 </div>
 </body>
 </html>
