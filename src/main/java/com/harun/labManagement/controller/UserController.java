@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 import java.util.List;
@@ -106,6 +107,35 @@ public class UserController {
     @GetMapping("/addUser")
     public String addUser(Model model){
         if(isLogin && loginedUser.getIsManager()){
+            return "addUser";
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping("/register/{id}/{password}/{name}/{surname}/{isManager}")
+    public String register(@PathVariable String id,@PathVariable String password,@PathVariable String name,@PathVariable String surname,@PathVariable boolean isManager,Model model){
+
+        if(isLogin && loginedUser.getIsManager()){
+            Long idL = Long.parseLong(id);
+            try{
+                //If ID length is not 7
+                if(id.trim().length() != 7) {
+                    model.addAttribute("lengthValidation", false);
+                    model.addAttribute("status",false);
+                }
+
+                //If a user exist with same id already then don't add and throw error
+                else if(!userService.isUserPresent(idL)){
+                    userService.addUser(new User(idL,name,surname,isManager,password));
+                    model.addAttribute("status",true);
+                }
+
+                else
+                    throw new IllegalArgumentException();
+
+            }catch (IllegalArgumentException e){
+                model.addAttribute("status",false);
+            }
             return "addUser";
         }
         return "redirect:/";

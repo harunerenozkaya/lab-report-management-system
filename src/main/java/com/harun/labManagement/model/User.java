@@ -6,9 +6,7 @@ import javax.persistence.*;
 @Table(name="users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
-
     private String user_name;
     private String user_surname;
     private boolean is_manager;

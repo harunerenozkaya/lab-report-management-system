@@ -3,8 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Add User</title>
+    <script type="text/javascript" src="/scripts/register.js"></script>
 </head>
 <body>
-<h1>Add User Page</h1>
+<div>
+    <h1>Add User Page</h1>
+    <form>
+        <label for="id">ID:</label>
+        <input type="number" id="id" name="id" minlength=7 maxlength=7 >
+        <div th:switch="${lengthValidation}">
+            <label th:case="false">ID Length must be 7 (seven)</label>
+            <label th:case="*"></label>
+        </div><br>
+
+        <label for="pwd">Password:</label><br>
+        <input type="password" id="pwd" name="pwd"><br>
+
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+
+        <label for="surname">Surname:</label><br>
+        <input type="text" id="surname" name="surname"><br>
+
+        <label for="manager">Is Manager?: </label>
+        <input type="checkbox" id="manager" name="manager"><br>
+
+        <input type="button" value="Register" onclick="register()">
+
+    </form>
+
+    <div th:switch="${status}">
+        <h1 th:case="true">User has been added successfully</h1>
+        <h1 th:case="false">User has not been added! Error.</h1>
+        <h1 th:case="*"></h1>
+    </div>
+
+</div>
 </body>
 </html>
