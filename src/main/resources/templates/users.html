@@ -1,31 +1,46 @@
 <html>
-<head>
-    <title>Users</title>
-    <script type="text/javascript" src="/scripts/directAddUser.js"></script>
-    <script type="text/javascript" src="/scripts/exitSystem.js"></script>
-</head>
+    <head>
+        <title>Users</title>
+        <script type="text/javascript" src="/scripts/directAddUser.js"></script>
+        <script type="text/javascript" src="/scripts/exitSystem.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+              crossorigin="anonymous">
+    </head>
 
-<body>
-<div>
-    <h2>Users</h2>
-    <table>
-        <tr>
-            <th>userId</th>
-            <th>userName</th>
-            <th>userSurname</th>
-            <th>isManager</th>
-        </tr>
-        <tr th:each="c : ${usersList}">
-            <td>
-                <a th:href="@{${'user/' + c.getUserId()}}" th:text="${c.getUserId()}"></a>
-            </td>
-            <td th:text="${c.getUserName()}"></td>
-            <td th:text="${c.getUserSurname()}"></td>
-            <td th:text="${c.getIsManager()}"></td>
-        </tr>
-    </table>
-    <input type="button" onclick="exitSystem()" value="Exit">
-    <input type="button" onclick="directAddUser()" value="Add User">
-</div>
-</body>
+    <body>
+        <div class="container">
+            <div class="row mt-5 align-items-center">
+                <div class="col-9" style="text-align: center; padding-left: 27%;">
+                    <h2>Users</h2>
+                </div>
+                <div class="col" style="margin-left:14%">
+                    <input style="background-color: coral" class="btn btn-primary" type="button" onclick="directAddUser()" value="Add User">
+                </div>
+
+            </div>
+            <div class="row mt-2" style="overflow-x:auto; height: 70%">
+                    <table class="table table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Surname</th>
+                                <th scope="col">Is Manager</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="c : ${usersList}">
+                            <td>
+                                <a th:href="@{${'user/' + c.getUserId()}}" th:text="${c.getUserId()}"></a>
+                            </td>
+                            <td th:text="${c.getUserName()}"></td>
+                            <td th:text="${c.getUserSurname()}"></td>
+                            <td th:text="${c.getIsManager()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </body>
 </html>

@@ -4,40 +4,61 @@
     <meta charset="UTF-8">
     <title>Add User</title>
     <script type="text/javascript" src="/scripts/register.js"></script>
-</head>
-<body>
-<div>
-    <h1>Add User Page</h1>
-    <form>
-        <label for="id">ID:</label>
-        <input type="number" id="id" name="id" minlength=7 maxlength=7 >
-        <div th:switch="${lengthValidation}">
-            <label th:case="false">ID Length must be 7 (seven)</label>
-            <label th:case="*"></label>
-        </div><br>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+              crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row justify-content-center mt-5">
+                <h2>Add User</h2>
+            </div>
+            <div class="row justify-content-center mt-3">
+                <div style="background-color:cadetblue; border-radius: 10px; padding-right: 10%; padding-left: 10%; padding-top: 2%; padding-bottom: 3%;">
+                    <form>
+                        <div class="form-group h-25">
+                            <label for="id">ID:</label><br>
+                            <input class="form-control" type="number" id="id" name="id" minlength=7 maxlength=7 >
+                            <div th:switch="${lengthValidation}">
+                                <small th:case="false">ID Length must be 7 (seven)</small>
+                                <small th:case="*"></small>
+                            </div>
+                        </div>
 
-        <label for="pwd">Password:</label><br>
-        <input type="password" id="pwd" name="pwd"><br>
+                        <div class="form-group h-25">
+                        <label for="pwd">Password:</label>
+                        <input class="form-control" type="password" id="pwd" name="pwd">
+                        </div>
 
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name"><br>
+                        <div class="form-group h-25">
+                        <label for="name">Name:</label><br>
+                        <input class="form-control" type="text" id="name" name="name">
+                        </div>
 
-        <label for="surname">Surname:</label><br>
-        <input type="text" id="surname" name="surname"><br>
+                        <div class="form-group h-25">
+                        <label for="surname">Surname:</label>
+                        <input class="form-control" type="text" id="surname" name="surname">
+                        </div>
 
-        <label for="manager">Is Manager?: </label>
-        <input type="checkbox" id="manager" name="manager"><br>
+                        <div class="form-group h-25">
+                        <label for="manager">Is Manager?: </label>
+                        <input  type="checkbox" id="manager" name="manager">
+                        </div>
 
-        <input type="button" value="Register" onclick="register()">
+                        <div class="row justify-content-center">
+                        <input style="background-color: coral; color: black" class="btn btn-primary" type="button" value="Register"  onclick="register()">
+                        </div>
 
-    </form>
+                    </form>
+                </div>
+            </div>
 
-    <div th:switch="${status}">
-        <h1 th:case="true">User has been added successfully</h1>
-        <h1 th:case="false">User has not been added! Error.</h1>
-        <h1 th:case="*"></h1>
-    </div>
+            <div class="row justify-content-center mt-5" th:switch="${status}">
+                <div style="background-color:palegreen; border-radius: 10px; padding: 0.6%;" th:case="true">User has been added successfully</div>
+                <div style="background-color:indianred; border-radius: 10px; padding: 0.6%;" th:case="false">User has not been added! Error.</div>
+                <div th:case="*"></div>
+            </div>
 
-</div>
-</body>
+        </div>
+    </body>
 </html>
