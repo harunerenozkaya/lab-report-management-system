@@ -19,7 +19,7 @@
                     <form>
                         <div class="form-group h-25">
                             <label for="id">ID:</label><br>
-                            <input class="form-control" type="number" id="id" name="id" minlength=7 maxlength=7 >
+                            <input class="form-control" type="number" id="id" name="id">
                             <div th:switch="${lengthValidation}">
                                 <small th:case="false">ID Length must be 7 (seven)</small>
                                 <small th:case="*"></small>
