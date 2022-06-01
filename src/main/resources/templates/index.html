@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lab Report Management System</title>
+        <script type="text/javascript" src="/scripts/login.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <div class="container">
+
+            <div class="row justify-content-center mt-5">
+                <h2>Lab Report Management System</h2>
+            </div>
+
+            <div class="row justify-content-center mt-5">
+                <div style="background-color:cadetblue; border-radius: 10px; padding-right: 10%; padding-left: 10%; padding-top: 2%; padding-bottom: 3%;">
+                    <form>
+                        <div class="form-group h-25">
+                            <label for="id">ID:</label><br>
+                            <input class="form-control" type="number" id="id" name="id">
+                        </div>
+
+                        <div class="form-group h-25">
+                            <label for="pwd">Password:</label>
+                            <input class="form-control" type="password" id="pwd" name="pwd">
+                        </div>
+                        <div class="row justify-content-center">
+                            <input style="background-color: coral; color: black" class="btn btn-primary" type="button" value="Login"  onclick="login()">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mt-5" th:switch="${wrongLogin}">
+                <div th:case="true" style="background-color:indianred; border-radius: 10px; padding: 0.6%;" >ID or Password is wrong!</div>
+                <div th:case="*"></div>
+            </div>
+
+        </div>
+    </body>
+</html>
+

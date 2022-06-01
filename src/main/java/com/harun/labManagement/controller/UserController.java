@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 import java.util.List;
@@ -20,6 +19,7 @@ public class UserController {
 
     @Autowired
     private IUserService userService;
+
 
     /**
      * > This function is used to logout the user
@@ -47,20 +47,21 @@ public class UserController {
     public String login(@PathVariable String id,@PathVariable String password,Model model){
         boolean isPresent = userService.isUserPresent(Long.parseLong(id));
 
+        //Is User present
         if(isPresent){
             User user = (User) userService.getSingleUser(Long.parseLong(id));
 
+            //Is password is correct
             if(user.getUserPassword().trim().equals(password.trim())){
                 isLogin = true;
                 loginedUser = user;
                 return "redirect:/users";
             }
-            else
-                return "redirect:/";
         }
-        else
-            return "redirect:/";
 
+        //If user is not present or password is wrong then return index with error message
+        model.addAttribute("wrongLogin",true);
+        return "index";
     }
 
     /**
@@ -112,6 +113,17 @@ public class UserController {
         return "redirect:/";
     }
 
+    /**
+     * It adds a new user to the database if the user is a manager and the user is not already present in the database
+     *
+     * @param id ID of the user
+     * @param password Password of the user
+     * @param name The name of the parameter in the request.
+     * @param surname Surname of the user
+     * @param isManager If the user is a manager or not
+     * @param model This is the model object that is used to pass data from the controller to the view.
+     * @return A string
+     */
     @GetMapping("/register/{id}/{password}/{name}/{surname}/{isManager}")
     public String register(@PathVariable String id,@PathVariable String password,@PathVariable String name,@PathVariable String surname,@PathVariable boolean isManager,Model model){
 
