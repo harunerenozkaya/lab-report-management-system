@@ -20,6 +20,21 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
+    public User getLoginedUser() {
+        return loginedUser;
+    }
+
+    public void setLoginedUser(User loginedUser) {
+        this.loginedUser = loginedUser;
+    }
+
+    public boolean isLogin() {
+        return isLogin;
+    }
+
+    public void setLogin(boolean login) {
+        isLogin = login;
+    }
 
     /**
      * > This function is used to logout the user
@@ -55,7 +70,7 @@ public class UserController {
             if(user.getUserPassword().trim().equals(password.trim())){
                 isLogin = true;
                 loginedUser = user;
-                return "redirect:/users";
+                return "redirect:/reports";
             }
         }
 
@@ -72,10 +87,13 @@ public class UserController {
      */
     @GetMapping("/users")
     public String allUsers(Model model){
-        if(isLogin && loginedUser.getIsManager()){
-            List<User> result = (List<User>) userService.getAllUsers();
-            model.addAttribute("usersList",result);
-            return "users";
+        if(isLogin){
+            if(loginedUser.getIsManager()) {
+                List<User> users = (List<User>) userService.getAllUsers();
+                model.addAttribute("usersList", users);
+                return "users";
+            }
+            return "redirect:/reports";
         }
         return "redirect:/";
     }

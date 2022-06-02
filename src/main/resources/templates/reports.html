@@ -1,0 +1,60 @@
+<html>
+<head>
+    <title>Reports</title>
+    <script type="text/javascript" src="/scripts/directAddReport.js"></script>
+    <script type="text/javascript" src="/scripts/directUsers.js"></script>
+    <script type="text/javascript" src="/scripts/exitSystem.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-5">
+            <input style="background-color: darkred" class="btn btn-primary" type="button" onclick="exitSystem()" value="Exit">
+        </div>
+        <div class="col-5">
+            <h2>Reports</h2>
+        </div>
+        <div class="col" th:switch="${isManager}">
+            <div th:case="false">
+                <input style="background-color: coral" class="btn btn-primary ml-5" type="button" onclick="directAddReport()" value="Add Report">
+            </div>
+            <div th:case="true" class="row">
+                    <input style="background-color: coral" class="btn btn-primary" type="button" onclick="directAddReport()" value="Add Report">
+                    <input style="background-color: coral" class="btn btn-primary ml-2" type="button" onclick="directUsers()" value="Users">
+            </div>
+        </div>
+
+    </div>
+    <div class="row mt-2" style="overflow-x:auto; height: 70%">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Report ID</th>
+                <th scope="col">Patient Name</th>
+                <th scope="col">Patient TC</th>
+                <th scope="col">Diagnosis Title</th>
+                <th scope="col">Diagnosis Detail</th>
+                <th scope="col">Laborant Name</th>
+                <th scope="col">Report Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="c : ${reportList}">
+                <td th:text="${c.getId()}"></td>
+                <td th:text="${c.getPatientName() + ' ' + c.getPatientSurname()}"></td>
+                <td th:text="${c.getPatientTC}"></td>
+                <td th:text="${c.getDiagnosisTitle()}"></td>
+                <td th:text="${c.getDiagnosisDetail()}"></td>
+                <td th:text="${c.getUserName() + ' ' + c.getUserSurname()}"></td>
+                <td th:text="${c.getReportDate()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
