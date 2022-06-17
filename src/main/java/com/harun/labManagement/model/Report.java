@@ -1,16 +1,15 @@
 package com.harun.labManagement.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.Date;
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="reports")
 public class Report {
     @Id
     private Long report_id;
-    private Date report_date;
+
+    private LocalDate report_date;
     private String patient_name;
     private String patient_surname;
     private Long patient_tc;
@@ -24,8 +23,9 @@ public class Report {
 
     }
 
-    public Report(Long report_id,Date report_date,String patient_name,String patient_surname,Long patient_tc,String diagnosis_title,String diagnosis_detail,Long user_id,String user_name,String user_surname){
+    public Report(Long report_id,LocalDate report_date,String patient_name,String patient_surname,Long patient_tc,String diagnosis_title,String diagnosis_detail,Long user_id,String user_name,String user_surname){
         this.report_id = report_id;
+        this.report_date = report_date;
         this.patient_name = patient_name;
         this.patient_surname = patient_surname;
         this.patient_tc = patient_tc;
@@ -44,11 +44,11 @@ public class Report {
         return report_id;
     }
 
-    public Date getReportDate() {
+    public LocalDate getReportDate() {
         return report_date;
     }
 
-    public void setReportDate(Date report_date) {
+    public void setReportDate(LocalDate report_date) {
         this.report_date = report_date;
     }
 

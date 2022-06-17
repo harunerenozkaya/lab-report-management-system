@@ -7,23 +7,23 @@ import javax.persistence.*;
 public class User {
     @Id
     private Long user_id;
+    private String user_password;
     private String user_name;
     private String user_surname;
-    private boolean is_manager;
-    private String user_password;
+    private String role;
 
 
     public User()
     {
     }
 
-    public User(Long user_id,String user_name,String user_surname,boolean is_manager,String user_password)
+    public User(Long user_id,String user_name,String user_surname,String user_password,String role)
     {
         this.user_id = user_id;
         this.user_name = user_name;
         this.user_surname = user_surname;
-        this.is_manager = is_manager;
         this.user_password = user_password;
+        this.role = role;
     }
 
     public Long getUserId() {
@@ -50,19 +50,19 @@ public class User {
         this.user_surname = user_surname;
     }
 
-    public boolean getIsManager() {
-        return is_manager;
-    }
-
-    public void setIsManager(boolean is_manager){
-        this.is_manager = is_manager;
-    }
-
     public String getUserPassword() {
         return user_password;
     }
 
     public void setUserPassword(String user_password) {
         this.user_password = user_password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

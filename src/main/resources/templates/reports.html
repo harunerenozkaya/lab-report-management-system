@@ -18,11 +18,11 @@
         <div class="col-5">
             <h2>Reports</h2>
         </div>
-        <div class="col" th:switch="${isManager}">
-            <div th:case="false">
+        <div class="col" th:switch="${role}">
+            <div th:case="ROLE_LABORANT">
                 <input style="background-color: coral" class="btn btn-primary ml-5" type="button" onclick="directAddReport()" value="Add Report">
             </div>
-            <div th:case="true" class="row">
+            <div th:case="ROLE_MANAGER" class="row">
                     <input style="background-color: coral" class="btn btn-primary" type="button" onclick="directAddReport()" value="Add Report">
                     <input style="background-color: coral" class="btn btn-primary ml-2" type="button" onclick="directUsers()" value="Users">
             </div>
