@@ -8,7 +8,6 @@ import java.time.LocalDate;
 public class Report {
     @Id
     private Long report_id;
-
     private LocalDate report_date;
     private String patient_name;
     private String patient_surname;
@@ -19,11 +18,12 @@ public class Report {
     private String user_name;
     private String user_surname;
 
+
     public Report(){
 
     }
 
-    public Report(Long report_id,LocalDate report_date,String patient_name,String patient_surname,Long patient_tc,String diagnosis_title,String diagnosis_detail,Long user_id,String user_name,String user_surname){
+    public Report(Long report_id, LocalDate report_date, String patient_name, String patient_surname, Long patient_tc, String diagnosis_title, String diagnosis_detail, Long user_id, String user_name, String user_surname){
         this.report_id = report_id;
         this.report_date = report_date;
         this.patient_name = patient_name;
@@ -36,12 +36,12 @@ public class Report {
         this.user_surname = user_surname;
     }
 
-    public void setId(Long report_id) {
-        this.report_id = report_id;
-    }
-
     public Long getId() {
         return report_id;
+    }
+
+    public void setId(Long report_id) {
+        this.report_id = report_id;
     }
 
     public LocalDate getReportDate() {
@@ -115,4 +115,5 @@ public class Report {
     public void setUserSurname(String user_surname) {
         this.user_surname = user_surname;
     }
+
 }
