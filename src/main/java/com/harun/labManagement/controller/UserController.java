@@ -21,50 +21,6 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    /**
-     * > This function is used to logout the user
-     *
-     * @param model The model is a map that contains the data that will be displayed in the view.
-     * @return A string that is the name of the html file that is being returned.
-     */
-    @GetMapping("/logout")
-    public String logout(Model model){
-        return "redirect:/";
-    }
-
-
-    @GetMapping("/login")
-    public String login(Model model){
-        return "redirect:/reports";
-    }
-
-    /**
-     * This method controls whether login input's are correct if it is correct redirect to home page
-     * if it is not redirect to login page again
-     *
-     * @param id The id of the user
-     * @param password The password of the user.
-     * @param model This is the model object that is used to pass data from the controller to the view.
-     * @return A string that is the name of the html file that is being returned.
-
-    @GetMapping("/login/{id}/{password}")
-    public String login(@PathVariable String id,@PathVariable String password,Model model){
-        boolean isPresent = userService.isUserPresent(Long.parseLong(id));
-
-        //Is User present
-        if(isPresent){
-            User user = (User) userService.getSingleUser(Long.parseLong(id));
-
-            //Is password is correct
-            if(user.getUserPassword().trim().equals(password.trim())){
-                return "redirect:/reports";
-            }
-        }
-
-        //If user is not present or password is wrong then return index with error message
-        model.addAttribute("wrongLogin",true);
-        return "index";
-    }*/
 
     /**
      * If the user is logged in and is a manager, then get all users and return the users page

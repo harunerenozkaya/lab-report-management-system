@@ -38,12 +38,6 @@ public class LabUserDetailsService implements UserDetailsService {
         else{
             throw new UsernameNotFoundException("There is no user with this ID");
         }
-        System.out.println(username);
-        System.out.println(user.getUserId());
-        System.out.println(getAuthorities(user));
-        System.out.println(user.getUserName());
-        System.out.println(user.getUserPassword());
-        System.out.println(user.getRole() + "j");
 
         return new LabUserDetails(new org.springframework.security.core.userdetails.User(user.getUserId().toString(),
                 user.getUserPassword().trim(),
