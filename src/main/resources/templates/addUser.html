@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymelead.org">
     <head>
         <meta charset="UTF-8">
         <title>Add User</title>
-        <script type="text/javascript" src="/scripts/register.js"></script>
         <script type="text/javascript" src="/scripts/directUsers.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
                   integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -22,38 +21,35 @@
             </div>
             <div class="row justify-content-center mt-3">
                 <div style="background-color:cadetblue; border-radius: 10px; padding-right: 10%; padding-left: 10%; padding-top: 2%; padding-bottom: 3%;">
-                    <form>
+                    <form action="#" th:action="@{/addUser}" th:object="${user}" method="post">
                         <div class="form-group h-25">
                             <label for="id">ID:</label><br>
-                            <input class="form-control" type="number" id="id" name="id">
-                            <div th:switch="${lengthValidation}">
-                                <small th:case="false">ID Length must be 7 (seven)</small>
-                                <small th:case="*"></small>
-                            </div>
+                            <input class="form-control" type="number" id="id" name="id" th:field="*{userId}">
                         </div>
 
                         <div class="form-group h-25">
-                        <label for="pwd">Password:</label>
-                        <input class="form-control" type="password" id="pwd" name="pwd">
+                            <label for="pwd">Password:</label>
+                            <input class="form-control" type="password" id="pwd" name="pwd" th:field="*{userPassword}">
                         </div>
 
                         <div class="form-group h-25">
-                        <label for="name">Name:</label><br>
-                        <input class="form-control" type="text" id="name" name="name">
+                            <label for="name">Name:</label><br>
+                            <input class="form-control" type="text" id="name" name="name" th:field="*{userName}">
                         </div>
 
                         <div class="form-group h-25">
-                        <label for="surname">Surname:</label>
-                        <input class="form-control" type="text" id="surname" name="surname">
+                            <label for="surname">Surname:</label>
+                            <input class="form-control" type="text" id="surname" name="surname" th:field="*{userSurname}">
                         </div>
 
                         <div class="form-group h-25">
-                        <label for="manager">Is Manager?: </label>
-                        <input  type="checkbox" id="manager" name="manager">
+                            <label for="manager">Is Manager?: </label>
+                            <input  type="checkbox" id="manager" name="manager" value="true">
+                            <input type="hidden" id="hidden-manager" name="manager" value="false">
                         </div>
 
                         <div class="row justify-content-center">
-                        <input style="background-color: coral; color: black" class="btn btn-primary" type="button" value="Register"  onclick="register()">
+                            <input type="submit" style="background-color: coral; color: black" class="btn btn-primary"  value="Register">
                         </div>
 
                     </form>
@@ -61,8 +57,8 @@
             </div>
 
             <div class="row justify-content-center mt-5" th:switch="${status}">
-                <div style="background-color:palegreen; border-radius: 10px; padding: 0.6%;" th:case="true">User has been added successfully</div>
-                <div style="background-color:indianred; border-radius: 10px; padding: 0.6%;" th:case="false">User has not been added! Error.</div>
+                <div style="background-color:palegreen; border-radius: 10px; padding: 0.6%;" th:case="true" th:text="${statusMessage}"></div>
+                <div style="background-color:indianred; border-radius: 10px; padding: 0.6%;" th:case="false" th:text="${statusMessage}"></div>
                 <div th:case="*"></div>
             </div>
 

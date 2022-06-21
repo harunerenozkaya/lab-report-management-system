@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -57,43 +55,48 @@ public class UserController {
      * @return A string that is the name of the html file that is being returned.
      */
     @GetMapping("/addUser")
-    public String addUser(Model model){
-            return "addUser";
+    public String addUserPage(Model model){
+        model.addAttribute("user",new User());
+        return "addUser";
     }
 
-    /**
-     * It adds a new user to the database if the user is a manager and the user is not already present in the database
-     *
-     * @param id ID of the user
-     * @param password Password of the user
-     * @param name The name of the parameter in the request.
-     * @param surname Surname of the user
-     * @param role If the user is a manager or not
-     * @param model This is the model object that is used to pass data from the controller to the view.
-     * @return A string
-     */
-    @GetMapping("/register/{id}/{password}/{name}/{surname}/{role}")
-    public String register(@PathVariable String id,@PathVariable String password,@PathVariable String name,@PathVariable String surname,@PathVariable boolean role,Model model){
 
-        Long idL = Long.parseLong(id);
+    /**
+     * It adds a user to the database
+     *
+     * @param user This is the object that is created by Spring MVC. It is created by matching the form fields with the
+     * attributes of the User class.
+     * @param isManager This is a boolean parameter that is used to determine whether the user is a manager or a laborant.
+     * @param model This is the model object that is used to pass data from the controller to the view.
+     * @return A String
+     */
+    @PostMapping("/addUser")
+    public String addUser(@ModelAttribute User user, @RequestParam("manager") boolean isManager, Model model){
+        System.out.println(user.getUserId());
+        System.out.println(user.getUserName());
+        System.out.println(user.getUserSurname());
+        System.out.println(user.getUserPassword());
+        System.out.println(isManager);
+
         try{
             //If ID length is not 7
-            if(id.trim().length() != 7) {
-                model.addAttribute("lengthValidation", false);
+            if(user.getUserId().toString().length() != 7) {
                 model.addAttribute("status",false);
+                model.addAttribute("statusMessage","ID Length must be 7!");
             }
 
             //If a user exist with same id already then don't add and throw error
-            else if(!userService.isUserPresent(idL)){
+            else if(!userService.isUserPresent(user.getUserId())){
                 String roleString;
 
-                if(role)
+                if(isManager)
                     roleString = "ROLE_MANAGER";
                 else
                     roleString = "ROLE_LABORANT";
 
-                userService.addUser(new User(idL,name,surname,encoder.encode(password.trim()),roleString));
+                userService.addUser(new User(user.getUserId(),user.getUserName().trim(),user.getUserSurname().trim(),encoder.encode(user.getUserPassword().trim()),roleString));
                 model.addAttribute("status",true);
+                model.addAttribute("statusMessage","User has been added successfully!");
             }
 
             else
@@ -101,6 +104,7 @@ public class UserController {
 
         }catch (IllegalArgumentException e){
             model.addAttribute("status",false);
+            model.addAttribute("statusMessage","User has not been added. Error!");
         }
         return "addUser";
     }

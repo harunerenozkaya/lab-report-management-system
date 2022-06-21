@@ -53,7 +53,7 @@ public class ReportController {
      * @param model The model is a Map of model objects which will be passed to the view page.
      * @return A string that is the name of the html file that is being returned.
      */
-    @GetMapping("/addReportPage")
+    @GetMapping("/addReport")
     public String addReportPage(Model model){
         model.addAttribute("report",new Report());
         return "addReport";
