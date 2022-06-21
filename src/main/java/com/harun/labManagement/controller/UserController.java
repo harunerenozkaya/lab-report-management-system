@@ -17,7 +17,6 @@ import java.util.List;
 public class UserController {
     @Autowired
     private BCryptPasswordEncoder encoder;
-
     @Autowired
     private IUserService userService;
 

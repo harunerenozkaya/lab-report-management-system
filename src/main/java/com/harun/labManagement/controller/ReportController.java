@@ -36,9 +36,14 @@ public class ReportController {
      */
     @GetMapping("/reports")
     public String allReports(Model model){
+        //Get currentUser
+        User currentUser = getCurrentUser();
+        //Get all reports
         List<Report> reports = (List<Report>) reportService.getAllReports();
+
         model.addAttribute("reportList",reports);
-        model.addAttribute("role","ROLE_MANAGER");
+        model.addAttribute("role",currentUser.getRole());
+
         return "reports";
     }
 
