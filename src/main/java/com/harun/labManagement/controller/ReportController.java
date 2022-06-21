@@ -83,8 +83,9 @@ public class ReportController {
                 //Get laborant or manager who add this report
                 User currentUser = getCurrentUser();
 
-                //Save image
-                FileUploadUtil.saveFile("reportPhotos/",report.getId().toString() + ".png",multipartFile);
+                //Save image if it is not null
+                if(!multipartFile.isEmpty())
+                    FileUploadUtil.saveFile("reportPhotos/",report.getId().toString() + ".png",multipartFile);
 
                 //Add report
                 reportService.addReport(new Report(report.getId(), LocalDate.now(),report.getPatientName(),report.getPatientSurname(),report.getPatientTC(),report.getDiagnosisTitle(),report.getDiagnosisDetail(), currentUser.getUserId(), currentUser.getUserName(), currentUser.getUserSurname()));

@@ -48,7 +48,7 @@
                 <td th:text="${c.getPatientName() + ' ' + c.getPatientSurname()}"></td>
                 <td th:text="${c.getPatientTC}"></td>
                 <td th:text="${c.getDiagnosisTitle()}"></td>
-                <td th:text="${c.getDiagnosisDetail()}"></td>
+                <td th:text="${#strings.abbreviate(c.getDiagnosisDetail(),30)}"></td>
                 <td th:text="${c.getUserName() + ' ' + c.getUserSurname()}"></td>
                 <td th:text="${c.getReportDate()}"></td>
             </tr>
