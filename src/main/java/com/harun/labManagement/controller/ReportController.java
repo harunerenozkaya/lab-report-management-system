@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -93,7 +94,7 @@ public class ReportController {
                     FileUploadUtil.saveFile("reportPhotos/",report.getId().toString() + ".png",multipartFile);
 
                 //Add report
-                reportService.addReport(new Report(report.getId(), LocalDate.now(),report.getPatientName(),report.getPatientSurname(),report.getPatientTC(),report.getDiagnosisTitle(),report.getDiagnosisDetail(), currentUser.getUserId(), currentUser.getUserName(), currentUser.getUserSurname()));
+                reportService.addReport(new Report(report.getId(), LocalDate.now(),report.getPatientName().trim(),report.getPatientSurname().trim(),report.getPatientTC(),report.getDiagnosisTitle().trim(),report.getDiagnosisDetail().trim(), currentUser.getUserId(), currentUser.getUserName().trim(), currentUser.getUserSurname().trim()));
                 model.addAttribute("status",true);
                 model.addAttribute("statusMessage","Report has been added successfully");
             }
@@ -111,6 +112,43 @@ public class ReportController {
         }
         return "addReport";
     }
+
+    /**
+     * It gets the report with the given id and returns the report page
+     *
+     * @param reportId The id of the report that we want to see.
+     * @param model The model is a Map that is used to store the data that needs to be displayed on the view page.
+     * @return A report page with the report's information.
+     */
+    @GetMapping("/report/{reportId}")
+    public String report(@PathVariable String reportId,Model model){
+        Long reportIdL = Long.parseLong(reportId);
+
+        //Get report
+        Report report = reportService.getReportByID(reportIdL);
+
+        model.addAttribute("report",report);
+
+        //Controls the whether report photo is exist , if exist show downloadn button
+        if(FileUploadUtil.isFileExist("reportPhotos/",reportId+".png"))
+            model.addAttribute("isImage",true);
+
+        return "report";
+    }
+
+    /**
+     * It takes a reportId, gets the image from the database, and writes it to the response
+     *
+     * @param reportId The id of the report you want to download the image for.
+     * @param response The response object that will be used to send the image to the client.
+     */
+    @GetMapping("/downloadImage/{reportId}")
+    public void downloadImage(@PathVariable String reportId, HttpServletResponse response) throws IOException {
+        response.setContentType("image/png");
+        response.getOutputStream().write(FileUploadUtil.getFile("reportPhotos/",reportId + ".png"));
+        response.getOutputStream().close();
+    }
+
 
     /**
      * It gets the current user's username from the security context and then returns the user object from the database

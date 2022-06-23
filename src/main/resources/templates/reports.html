@@ -44,7 +44,9 @@
             </thead>
             <tbody>
             <tr th:each="c : ${reportList}">
-                <td th:text="${c.getId()}"></td>
+                <td>
+                    <a th:href="@{${'report/' + c.getId()}}" th:text="${c.getId()}"></a>
+                </td>
                 <td th:text="${c.getPatientName() + ' ' + c.getPatientSurname()}"></td>
                 <td th:text="${c.getPatientTC}"></td>
                 <td th:text="${c.getDiagnosisTitle()}"></td>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymelead.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Report</title>
+  <script type="text/javascript" src="/scripts/directReports.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+  <div class="row mt-5">
+    <div style="text-align: center" class="col-5">
+      <input style="background-color: coral" class="btn btn-primary ml-5" type="button" onclick="directReports()" value="Reports">
+    </div>
+    <div class="col">
+      <h2 th:text="${report.getId()}"></h2>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-3">
+    <div style="background-color:cadetblue; border-radius: 10px; padding-right: 10%; padding-left: 10%; padding-top: 2%; padding-bottom: 3%;">
+      <form>
+        <div class="form-group h-25">
+          <label for="id">Report ID:</label><br>
+          <input class="form-control" type="number" id="id" name="id" th:value="${report.getId()}" readonly="true">
+        </div>
+
+        <div class="form-group h-25">
+          <label for="patient-name">Patient Name:</label>
+          <input class="form-control" type="text" id="patient-name" name="patient-name" th:value="${report.getPatientName()}" readonly="true">
+        </div>
+
+        <div class="form-group h-25">
+          <label for="patient-surname">Patient Surname:</label>
+          <input class="form-control" type="text" id="patient-surname" name="patient-surname" th:value="${report.getPatientSurname()}" readonly="true">
+        </div>
+
+        <div class="form-group h-25">
+          <label for="patient-TC">Patient TC:</label>
+          <input class="form-control" type="number" id="patient-TC" name="patient-TC" th:value="${report.getPatientTC()}" readonly="true">
+        </div>
+
+        <div class="form-group h-25">
+          <label for="diagnosis-title">Diagnosis Title: </label>
+          <input class="form-control"  type="text" id="diagnosis-title" name="diagnosis-title"  th:value="${report.getDiagnosisTitle()}" readonly="true">
+        </div>
+
+        <div class="form-group h-25">
+          <label for="diagnosis-detail">Diagnosis Detail: </label>
+          <textarea class="form-control" id="diagnosis-detail" name="diagnosis-detail" rows="7" style="resize:none" th:text="${report.getDiagnosisDetail()}" readonly="true"></textarea>
+        </div>
+
+        <div class="form-group h-25">
+          <label for="user-name-surname">Laborant Name: </label>
+          <input class="form-control" type="text"  id="user-name-surname" name="user-name-surname" th:value="${#strings.trim(report.getUserName())} +' '+ ${#strings.trim(report.getUserSurname())}" readonly="true">
+        </div>
+
+        <div class="form-group h-25" th:switch="${isImage}">
+            <div th:case="true" class="mt-5" style="padding-left: 7%; padding-right: 7%">
+              <a download th:href="@{${'/downloadImage/' + report.getId()}}">
+                <input style="background-color: coral; font-size: 13px;" class="form-control btn btn-primary" type="button" id="download-image" name="download-image" value="Download Report Photo">
+              </a>
+            </div>
+            <div th:case="*"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

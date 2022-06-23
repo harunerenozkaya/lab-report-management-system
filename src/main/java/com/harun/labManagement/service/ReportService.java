@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReportService implements IReportService{
@@ -22,6 +23,11 @@ public class ReportService implements IReportService{
 
     @Override
     public Report getReportByID(Long reportId) {
+        Optional<Report> optional = repository.findById(reportId);
+
+        if(optional.isPresent())
+            return optional.get();
+
         return null;
     }
 
