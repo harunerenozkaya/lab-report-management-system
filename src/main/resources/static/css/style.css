@@ -6,3 +6,9 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
 }
+
+/*reports table fixed head*/
+.thead-dark{
+    position: sticky;
+    top: 0;
+}
