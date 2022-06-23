@@ -59,6 +59,11 @@ public class ReportService implements IReportService{
 
     @Override
     public Long removeReport(Long reportId) {
-        return null;
+        if(repository.existsById(reportId)){
+            repository.deleteById(reportId);
+            return reportId;
+        }
+
+        return -1L;
     }
 }

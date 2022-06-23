@@ -19,6 +19,17 @@
       <h2 th:text="${report.getId()}"></h2>
     </div>
   </div>
+  <div class="row mt-3">
+    <div class="col" style="text-align: right">
+      <a th:href="@{${'/deleteReport/' + report.getId()}}">
+        <input style="background-color: darkred" class="btn btn-primary" type="button" value="Delete">
+      </a>
+    </div>
+
+    <div class="col">
+      <input style="background-color: coral" class="btn btn-primary" type="button" value="Edit">
+    </div>
+  </div>
   <div class="row justify-content-center mt-3">
     <div style="background-color:cadetblue; border-radius: 10px; padding-right: 10%; padding-left: 10%; padding-top: 2%; padding-bottom: 3%;">
       <form>

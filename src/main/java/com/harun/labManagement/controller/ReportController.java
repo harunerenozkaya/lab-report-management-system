@@ -143,10 +143,24 @@ public class ReportController {
      * @param response The response object that will be used to send the image to the client.
      */
     @GetMapping("/downloadImage/{reportId}")
-    public void downloadImage(@PathVariable String reportId, HttpServletResponse response) throws IOException {
+    public void downloadReportImage(@PathVariable String reportId, HttpServletResponse response) throws IOException {
         response.setContentType("image/png");
         response.getOutputStream().write(FileUploadUtil.getFile("reportPhotos/",reportId + ".png"));
         response.getOutputStream().close();
+    }
+
+    /**
+     * The function takes in a reportId and a model, and then deletes the report with the given reportId, and then
+     * redirects the user to the reports page
+     *
+     * @param reportId The id of the report to be deleted.
+     * @param model This is the model object that is used to pass data from the controller to the view.
+     * @return A string that redirects to the reports page.
+     */
+    @GetMapping("/deleteReport/{reportId}")
+    public String deleteReport(@PathVariable String reportId,Model model){
+        reportService.removeReport(Long.parseLong(reportId));
+        return "redirect:/reports";
     }
 
 
