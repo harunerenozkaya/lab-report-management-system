@@ -7,15 +7,25 @@ import java.time.LocalDate;
 @Table(name="reports")
 public class Report {
     @Id
+    @Column(name = "report_id")
     private Long report_id;
+    @Column(name = "report_date")
     private LocalDate report_date;
+    @Column(name = "patient_name")
     private String patient_name;
+    @Column(name = "patient_surname")
     private String patient_surname;
+    @Column(name = "patient_tc")
     private Long patient_tc;
+    @Column(name = "diagnosis_title")
     private String diagnosis_title;
+    @Column(name = "diagnosis_detail")
     private String diagnosis_detail;
+    @Column(name = "user_id")
     private Long user_id;
+    @Column(name = "user_name")
     private String user_name;
+    @Column(name = "user_surname")
     private String user_surname;
 
 

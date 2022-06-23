@@ -1,12 +1,12 @@
 package com.harun.labManagement.service;
 
 import com.harun.labManagement.model.Report;
-import com.harun.labManagement.model.User;
 import com.harun.labManagement.repository.ReportRepository;
-import com.harun.labManagement.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +19,16 @@ public class ReportService implements IReportService{
     @Override
     public List<Report> getAllReports() {
         return (List<Report>) repository.findAll();
+    }
+
+    @Override
+    public List<Report> getAllReportsAscendingDate() {
+        return repository.findAllByOrderByReportDateAsc();
+    }
+
+    @Override
+    public List<Report> getAllReportsDescendingDate() {
+        return repository.findAllByOrderByReportDateDesc();
     }
 
     @Override

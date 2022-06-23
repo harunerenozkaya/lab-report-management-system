@@ -48,6 +48,26 @@ public class ReportController {
         return "reports";
     }
 
+    @GetMapping("/reports/{orderType}")
+    public String allReportsOrdered(@PathVariable String orderType ,Model model){
+        List<Report> reports = null;
+
+        //Get currentUser
+        User currentUser = getCurrentUser();
+
+        //Get all reports by order type
+        if(orderType.equals("asc")){
+            reports = (List<Report>) reportService.getAllReportsAscendingDate();
+        }else if( orderType.equals("desc")){
+            reports = (List<Report>) reportService.getAllReportsDescendingDate();
+        }
+
+        model.addAttribute("reportList",reports);
+        model.addAttribute("role",currentUser.getRole());
+
+        return "reports";
+    }
+
     /**
      * This function is used to redirect to add report page
      *

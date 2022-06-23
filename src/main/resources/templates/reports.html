@@ -1,6 +1,7 @@
 <html>
 <head>
     <title>Reports</title>
+    <script type="text/javascript" src="/scripts/directOrderedReports.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous">
@@ -45,7 +46,9 @@
                 <th scope="col">Diagnosis Title</th>
                 <th scope="col">Diagnosis Detail</th>
                 <th scope="col">Laborant Name</th>
-                <th scope="col">Report Date</th>
+                <th scope="col">
+                    <a href="#" onclick="directOrderedReports(); return false;" style="color: white">Report Date</a>
+                </th>
             </tr>
             </thead>
             <tbody>
