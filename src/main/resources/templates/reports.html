@@ -1,9 +1,6 @@
 <html>
 <head>
     <title>Reports</title>
-    <script type="text/javascript" src="/scripts/directAddReport.js"></script>
-    <script type="text/javascript" src="/scripts/directUsers.js"></script>
-    <script type="text/javascript" src="/scripts/exitSystem.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous">
@@ -13,18 +10,26 @@
 <div class="container">
     <div class="row mt-5">
         <div class="col-5">
-            <input style="background-color: darkred" class="btn btn-primary" type="button" onclick="exitSystem()" value="Exit">
+            <a href="/logout">
+                <input style="background-color: darkred" class="btn btn-primary" type="button" value="Exit">
+            </a>
         </div>
         <div class="col-5">
             <h2>Reports</h2>
         </div>
         <div class="col" th:switch="${#strings.trim(role)}">
             <div th:case="ROLE_LABORANT">
-                <input style="background-color: coral" class="btn btn-primary ml-5" type="button" onclick="directAddReport()" value="Add Report">
+                <a href = "/addReport">
+                    <input style="background-color: coral" class="btn btn-primary ml-5" type="button" value="Add Report">
+                </a>
             </div>
             <div th:case="ROLE_MANAGER" class="row">
-                    <input style="background-color: coral" class="btn btn-primary" type="button" onclick="directAddReport()" value="Add Report">
-                    <input style="background-color: coral" class="btn btn-primary ml-2" type="button" onclick="directUsers()" value="Users">
+                <a href="/addReport">
+                    <input style="background-color: coral" class="btn btn-primary" type="button" value="Add Report">
+                </a>
+                <a href="/users">
+                    <input style="background-color: coral" class="btn btn-primary ml-2" type="button" value="Users">
+                </a>
             </div>
         </div>
 

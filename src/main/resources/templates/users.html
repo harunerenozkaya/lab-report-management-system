@@ -1,9 +1,6 @@
 <html>
     <head>
         <title>Users</title>
-        <script type="text/javascript" src="/scripts/directAddUser.js"></script>
-        <script type="text/javascript" src="/scripts/exitSystem.js"></script>
-        <script type="text/javascript" src="/scripts/directReports.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
               crossorigin="anonymous">
@@ -12,9 +9,13 @@
     <body>
         <div class="container">
             <div class="d-flex flex-row justify-content-between mt-5">
-                <input style="background-color: coral" class="btn btn-primary" type="button" onclick="directReports()" value="Reports">
+                <a href="/reports">
+                    <input style="background-color: coral" class="btn btn-primary" type="button" value="Reports">
+                </a>
                 <h2>Users</h2>
-                <input style="background-color: coral" class="btn btn-primary" type="button" onclick="directAddUser()" value="Add User">
+                <a href="/addUser">
+                    <input style="background-color: coral" class="btn btn-primary" type="button" value="Add User">
+                </a>
             </div>
             <div class="row mt-2" style="overflow-x:auto; height: 70%">
                     <table class="table table-hover">

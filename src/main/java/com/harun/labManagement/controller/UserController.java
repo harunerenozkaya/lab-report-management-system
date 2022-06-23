@@ -72,11 +72,6 @@ public class UserController {
      */
     @PostMapping("/addUser")
     public String addUser(@ModelAttribute User user, @RequestParam("manager") boolean isManager, Model model){
-        System.out.println(user.getUserId());
-        System.out.println(user.getUserName());
-        System.out.println(user.getUserSurname());
-        System.out.println(user.getUserPassword());
-        System.out.println(isManager);
 
         try{
             //If ID length is not 7
