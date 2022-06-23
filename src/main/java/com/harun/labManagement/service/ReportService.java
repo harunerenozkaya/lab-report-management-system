@@ -48,12 +48,20 @@ public class ReportService implements IReportService{
 
     @Override
     public Long addReport(Report report) {
-        Long id = repository.save(report).getId();
-        return id;
+        if(!repository.existsById(report.getId())){
+            repository.save(report);
+            return report.getId();
+        }
+        return null;
     }
 
     @Override
     public Long updateReport(Long reportId, Report report) {
+        if(repository.existsById(reportId)){
+            repository.deleteById(reportId);
+            repository.save(report);
+            return reportId;
+        }
         return null;
     }
 
@@ -64,6 +72,6 @@ public class ReportService implements IReportService{
             return reportId;
         }
 
-        return -1L;
+        return null;
     }
 }

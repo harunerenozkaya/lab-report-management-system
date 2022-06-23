@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymelead.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Report</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+    <div class="row mt-5">
+        <div style="text-align: center" class="col-5">
+            <a href="/reports">
+                <input style="background-color: coral" class="btn btn-primary ml-5" type="button" value="Reports">
+            </a>
+        </div>
+        <div class="col">
+            <h2>Edit Report</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div style="background-color:cadetblue; border-radius: 10px; padding-right: 10%; padding-left: 10%; padding-top: 2%; padding-bottom: 3%;">
+            <form action="#" th:action="@{/editReport}" th:object="${report}" enctype="multipart/form-data" method="post">
+                <div class="form-group h-25">
+                    <label for="id">Report ID:</label><br>
+                    <input class="form-control" type="number" id="id" name="id" readonly="true" th:field="*{id}">
+                </div>
+
+                <div class="form-group h-25">
+                    <label for="patient-name">Patient Name:</label>
+                    <input class="form-control" type="text" id="patient-name" name="patient-name" th:field="*{patientName}">
+                </div>
+
+                <div class="form-group h-25">
+                    <label for="patient-surname">Patient Surname:</label>
+                    <input class="form-control" type="text" id="patient-surname" name="patient-surname" th:field="*{patientSurname}">
+                </div>
+
+                <div class="form-group h-25">
+                    <label for="patient-TC">Patient TC:</label>
+                    <input class="form-control" type="number" id="patient-TC" name="patient-TC" th:field="*{patientTC}">
+                </div>
+
+                <div class="form-group h-25">
+                    <label for="diagnosis-title">Diagnosis Title: </label>
+                    <input class="form-control"  type="text" id="diagnosis-title" name="diagnosis-title" th:field="*{diagnosisTitle}">
+                </div>
+
+                <div class="form-group h-25">
+                    <label for="diagnosis-detail">Diagnosis Detail: </label>
+                    <textarea class="form-control" id="diagnosis-detail" name="diagnosis-detail" style="resize:none" th:field="*{diagnosisDetail}" rows="7" ></textarea>
+
+                </div>
+
+                <div class="form-group h-25">
+                    <label for="diagnosis-img">Diagnosis Photo: </label>
+                    <input class="form-control"  type="file" id="diagnosis-img" name="diagnosis-img" accept="image/*">
+                </div>
+
+                <div class="row justify-content-center">
+                    <input type="submit" style="background-color: coral; color: black" class="btn btn-primary" value="Edit Report">
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-5" th:switch="${status}">
+        <div style="background-color:palegreen; border-radius: 10px; padding: 0.6%;" th:case="true" th:text="${statusMessage}"></div>
+        <div style="background-color:indianred; border-radius: 10px; padding: 0.6%;" th:case="false" th:text="${statusMessage}"></div>
+        <div th:case="*"></div>
+    </div>
+
+</div>
+</body>
+</html>

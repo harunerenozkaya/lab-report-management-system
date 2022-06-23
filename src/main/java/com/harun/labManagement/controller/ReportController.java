@@ -158,10 +158,81 @@ public class ReportController {
      * @return A string that redirects to the reports page.
      */
     @GetMapping("/deleteReport/{reportId}")
-    public String deleteReport(@PathVariable String reportId,Model model){
+    public String deleteReport(@PathVariable String reportId,Model model) throws IOException {
+        //Delete report from database
         reportService.removeReport(Long.parseLong(reportId));
+
+        //Delete image
+        FileUploadUtil.deleteFile("reportPhotos/",reportId + ".png");
+
         return "redirect:/reports";
     }
+
+    /**
+     * This function shows the editReport page
+     *
+     * @param reportId The id of the report to be edited.
+     * @param model This is the model that will be passed to the view.
+     * @return The editReport.html page is being returned.
+     */
+    @GetMapping("/editReport/{reportId}")
+    public String editReport(@PathVariable String reportId,Model model){
+        Long reportIdL = Long.parseLong(reportId);
+
+        //Get report
+        Report report = reportService.getReportByID(reportIdL);
+
+        model.addAttribute("report",report);
+
+        return "editReport";
+    }
+
+    /**
+     * This function is used to edit a report
+     *
+     * @param report The report object that is sent from the form.
+     * @param multipartFile The file that is uploaded.
+     * @param model The model is an object containing all model attributes.
+     * @return a String.
+     */
+    @PostMapping("/editReport")
+    public String editReport(@ModelAttribute Report report, @RequestParam("diagnosis-img") MultipartFile multipartFile, Model model){
+
+        try{
+
+            //If TC length is not 11
+            if (String.valueOf(report.getPatientTC()).length() != 11) {
+                model.addAttribute("status",false);
+                model.addAttribute("statusMessage","Patient TC length must be 11 !");
+            }
+
+            //If a report exist with same id already then it can be editable
+            else if(reportService.isReportPresent(report.getId())){
+                //Get laborant or manager who add this report
+                User currentUser = getCurrentUser();
+
+                //Delete old image
+                FileUploadUtil.deleteFile("reportPhotos/",report.getId().toString() + ".png");
+
+                //Save image if it is not empty
+                if(!multipartFile.isEmpty())
+                    FileUploadUtil.saveFile("reportPhotos/",report.getId().toString() + ".png",multipartFile);
+
+                //Edit report
+                reportService.updateReport(report.getId(),new Report(report.getId(), LocalDate.now(),report.getPatientName().trim(),report.getPatientSurname().trim(),report.getPatientTC(),report.getDiagnosisTitle().trim(),report.getDiagnosisDetail().trim(), currentUser.getUserId(), currentUser.getUserName().trim(), currentUser.getUserSurname().trim()));
+                model.addAttribute("status",true);
+                model.addAttribute("statusMessage","Report has been edited successfully");
+            }
+
+        } catch (IOException e) {
+            model.addAttribute("status",false);
+            model.addAttribute("statusMessage","There is a error about photo!");
+            throw new RuntimeException(e);
+        }
+
+        return "editReport";
+    }
+
 
 
     /**

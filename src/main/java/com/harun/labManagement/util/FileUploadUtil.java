@@ -65,4 +65,15 @@ public class FileUploadUtil {
         Path filePath = Paths.get(dir + fileName);
         return Files.exists(filePath);
     }
+
+    public static boolean deleteFile(String dir,String fileName) throws IOException {
+        Path filePath = Paths.get(dir + fileName);
+
+        if(isFileExist(dir,fileName)){
+            Files.delete(filePath);
+            return true;
+        }
+
+        return false;
+    }
 }

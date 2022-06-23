@@ -28,7 +28,9 @@
     </div>
 
     <div class="col">
-      <input style="background-color: coral" class="btn btn-primary" type="button" value="Edit">
+      <a th:href="@{${'/editReport/' + report.getId()}}">
+        <input style="background-color: coral" class="btn btn-primary" type="button" value="Edit">
+      </a>
     </div>
   </div>
   <div class="row justify-content-center mt-3">
