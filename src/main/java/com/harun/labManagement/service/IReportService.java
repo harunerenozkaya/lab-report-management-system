@@ -12,6 +12,24 @@ public interface IReportService {
 
     List<Report> getAllReportsDescendingDate();
 
+    List<Report> getAllReportsByPatientTC(Long patientTC);
+
+    List<Report> getAllReportsByPatientNS(String name,String surname);
+
+    List<Report> getAllReportsByLaborantNS(String name,String surname);
+
+    List<Report> getAllReportsByPatientTCOrderedAsc(Long patientTC);
+
+    List<Report> getAllReportsByPatientNSOrderedAsc(String name,String surname);
+
+    List<Report> getAllReportsByLaborantNSOrderedAsc(String name,String surname);
+
+    List<Report> getAllReportsByPatientTCOrderedDesc(Long patientTC);
+
+    List<Report> getAllReportsByPatientNSOrderedDesc(String name,String surname);
+
+    List<Report> getAllReportsByLaborantNSOrderedDesc(String name,String surname);
+
     Report getReportByID(Long reportId);
 
     Report getReportByUserName(Long reportId);

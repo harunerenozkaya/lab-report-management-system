@@ -18,6 +18,7 @@ public class IndexController {
     public String index(Model model){
         return "index";
     }
+
     @GetMapping("/wrongLogin")
     public String indexWrong(Model model){
         model.addAttribute("wrongLogin",true);

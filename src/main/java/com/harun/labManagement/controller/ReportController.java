@@ -29,40 +29,99 @@ public class ReportController {
     private IUserService userService;
 
 
+
     /**
-     * This function is used to get all the reports from the database and display them on the reports page
+     * It gets all reports from database by parameters and returns them to the view
      *
+     * @param orderType It is used to sort the reports.
+     * @param searchType It is the type of search.
+     * @param searchInput The input that the user has entered in the search bar.
      * @param model The model is a Map that is used to store the data that will be displayed on the view page.
-     * @return A list of all reports
+     * @return A list of reports.
      */
     @GetMapping("/reports")
-    public String allReports(Model model){
-        //Get currentUser
-        User currentUser = getCurrentUser();
-        //Get all reports
-        List<Report> reports = (List<Report>) reportService.getAllReports();
-
-        model.addAttribute("reportList",reports);
-        model.addAttribute("role",currentUser.getRole());
-
-        return "reports";
-    }
-
-    @GetMapping("/reports/{orderType}")
-    public String allReportsOrdered(@PathVariable String orderType ,Model model){
+    public String allReports(@RequestParam(value = "orderType", required = false) String orderType,@RequestParam(value = "searchType", required = false) String searchType,@RequestParam(value = "searchInput", required = false) String searchInput,Model model){
         List<Report> reports = null;
 
+        /*
+        * Build search name surname
+        */
+        int nameSurnameCount = 0;
+        StringBuilder name = new StringBuilder();
+        String surname = "";
+
+        if(searchInput != null){
+            String[] nameArr = searchInput.trim().split("\\s+");
+
+            for(int i=0; i<nameArr.length; i++){
+                if(i == nameArr.length-1)
+                    surname = nameArr[i];
+                else
+                    name.append(nameArr[i] + " ");
+            }
+        }
+
         //Get currentUser
         User currentUser = getCurrentUser();
 
-        //Get all reports by order type
-        if(orderType.equals("asc")){
-            reports = (List<Report>) reportService.getAllReportsAscendingDate();
-        }else if( orderType.equals("desc")){
-            reports = (List<Report>) reportService.getAllReportsDescendingDate();
+        //Get all reports
+        if(orderType == null && searchType == null){
+            reports = (List<Report>) reportService.getAllReports();
+        }
+        //Get all reports ordered
+        else if(orderType != null && searchType == null){
+            if(orderType.equals("asc")){
+                reports = (List<Report>) reportService.getAllReportsAscendingDate();
+            }else if( orderType.equals("desc")){
+                reports = (List<Report>) reportService.getAllReportsDescendingDate();
+            }
+        }
+        //Get searching reports (not ordered)
+        else if(orderType == null && searchType != null){
+
+            switch (searchType){
+                case "patientTC":
+                    reports = (List<Report>) reportService.getAllReportsByPatientTC(Long.parseLong(searchInput));
+                    break;
+                case "patientNS":
+                    reports = (List<Report>) reportService.getAllReportsByPatientNS(name.toString(),surname);
+                    break;
+                case "laborantNS":
+                    reports = (List<Report>) reportService.getAllReportsByLaborantNS(name.toString(),surname);
+                    break;
+            }
+        }
+        //Get searching reports (ordered)
+        else{
+            if(orderType.equals("asc")){
+
+                switch (searchType){
+                    case "patientTC":
+                        reports = (List<Report>) reportService.getAllReportsByPatientTCOrderedAsc(Long.parseLong(searchInput));
+                        break;
+                    case "patientNS":
+                        reports = (List<Report>) reportService.getAllReportsByPatientNSOrderedAsc(name.toString(),surname);
+                        break;
+                    case "laborantNS":
+                        reports = (List<Report>) reportService.getAllReportsByLaborantNSOrderedAsc(name.toString(),surname);
+                        break;
+                }
+            }else if( orderType.equals("desc")){
+                switch (searchType){
+                    case "patientTC":
+                        reports = (List<Report>) reportService.getAllReportsByPatientTCOrderedDesc(Long.parseLong(searchInput));
+                        break;
+                    case "patientNS":
+                        reports = (List<Report>) reportService.getAllReportsByPatientNSOrderedDesc(name.toString(),surname);
+                        break;
+                    case "laborantNS":
+                        reports = (List<Report>) reportService.getAllReportsByLaborantNSOrderedDesc(name.toString(),surname);
+                        break;
+                }
+            }
         }
 
-        model.addAttribute("reportList",reports);
+        model.addAttribute("reports",reports);
         model.addAttribute("role",currentUser.getRole());
 
         return "reports";

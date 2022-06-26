@@ -32,6 +32,35 @@ public class ReportService implements IReportService{
     }
 
     @Override
+    public List<Report> getAllReportsByPatientTC(Long patientTC){return repository.getAllReportsByPatientTC(patientTC);}
+
+    @Override
+    public List<Report> getAllReportsByPatientNS(String name,String surname){return repository.getAllReportsByPatientNS(name,surname);}
+
+    @Override
+    public List<Report> getAllReportsByLaborantNS(String name,String surname){return repository.getAllReportsByLaborantNS(name,surname);}
+
+    @Override
+    public List<Report> getAllReportsByPatientTCOrderedAsc(Long patientTC){return repository.getAllReportsByPatientTCOrderedAsc(patientTC);}
+
+    @Override
+    public List<Report> getAllReportsByPatientNSOrderedAsc(String name,String surname){return repository.getAllReportsByPatientNSOrderedAsc(name,surname);}
+
+    @Override
+    public List<Report> getAllReportsByLaborantNSOrderedAsc(String name,String surname){return repository.getAllReportsByLaborantNSOrderedAsc(name,surname);}
+
+    @Override
+    public List<Report> getAllReportsByPatientTCOrderedDesc(Long patientTC){return repository.getAllReportsByPatientTCOrderedDesc(patientTC);}
+
+    @Override
+    public List<Report> getAllReportsByPatientNSOrderedDesc(String name,String surname){return repository.getAllReportsByPatientNSOrderedDesc(name,surname);}
+
+    @Override
+    public List<Report> getAllReportsByLaborantNSOrderedDesc(String name,String surname){return repository.getAllReportsByLaborantNSOrderedDesc(name,surname);}
+
+
+
+    @Override
     public Report getReportByID(Long reportId) {
         Optional<Report> optional = repository.findById(reportId);
 
