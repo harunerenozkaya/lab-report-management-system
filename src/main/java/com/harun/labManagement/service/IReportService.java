@@ -30,6 +30,8 @@ public interface IReportService {
 
     List<Report> getAllReportsByLaborantNSOrderedDesc(String name,String surname);
 
+    int getReportCountByLaborantID(Long userID);
+
     Report getReportByID(Long reportId);
 
     Report getReportByUserName(Long reportId);

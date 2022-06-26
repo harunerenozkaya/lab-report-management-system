@@ -9,5 +9,7 @@ public interface IUserService {
     User getSingleUser(Long userId);
     boolean isUserPresent(Long userId);
     Long addUser(User user);
+    Long removeUser(Long userId);
+    Long updateUser(User user);
 
 }

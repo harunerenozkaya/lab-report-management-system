@@ -43,4 +43,7 @@ public interface ReportRepository extends CrudRepository<Report,Long> {
 
     @Query(value = "SELECT * FROM reports r WHERE r.user_name =:name AND r.user_surname =:surname ORDER BY report_date DESC;" ,nativeQuery = true)
     public List<Report> getAllReportsByLaborantNSOrderedDesc(String name, String surname);
+
+    @Query(value = "SELECT COUNT(*) FROM reports r WHERE r.user_id =:userID",nativeQuery = true)
+    public int getReportCountByLaborantID(Long userID);
 }

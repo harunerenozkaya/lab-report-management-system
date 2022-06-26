@@ -10,14 +10,27 @@
 </head>
 <body>
 <div class="container">
-    <div class="row mt-5">
+    <div class="row mt-5 mr-5">
         <div style="text-align: center" class="col-5">
             <a href="/users">
-                <input style="background-color: coral" class="btn btn-primary ml-5" type="button" value="Users">
+                <input style="background-color: coral" class="btn btn-primary" type="button" value="Users">
             </a>
         </div>
-        <div class="col">
+        <div class="col-7">
             <h2 th:text="${user.getUserName() +' '+ user.getUserSurname()}"></h2>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col" style="text-align: right">
+            <a th:href="@{${'/deleteUser/' + user.getUserId()}}">
+                <input style="background-color: darkred" class="btn btn-primary" type="button" value="Delete">
+            </a>
+        </div>
+
+        <div class="col">
+            <a th:href="@{${'/editUser/' + user.getUserId()}}">
+                <input style="background-color: coral" class="btn btn-primary" type="button" value="Edit">
+            </a>
         </div>
     </div>
     <div class="row justify-content-center mt-3">
@@ -29,11 +42,6 @@
                 </div>
 
                 <div class="form-group h-25">
-                    <label for="pwd">Password:</label>
-                    <input class="form-control" type="text" id="pwd" name="pwd" th:value="${user.getUserPassword()}" readonly="true">
-                </div>
-
-                <div class="form-group h-25">
                     <label for="name">Name:</label><br>
                     <input class="form-control" type="text" id="name" name="name" th:value="${user.getUserName()}" readonly="true">
                 </div>
@@ -42,7 +50,10 @@
                     <label for="surname">Surname:</label>
                     <input class="form-control" type="text" id="surname" name="surname" th:value="${user.getUserSurname()}" readonly="true">
                 </div>
-
+                <div class="form-group h-25">
+                    <label for="reportCount">Report Count:</label>
+                    <input class="form-control" type="text" id="reportCount" name="reportCount" th:value="${reportCount}" readonly="true">
+                </div>
                 <div class="form-group h-25">
                     <div th:switch="${#strings.trim(user.getRole())}">
                         <div th:case="ROLE_MANAGER">

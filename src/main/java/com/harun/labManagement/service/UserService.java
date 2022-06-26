@@ -33,4 +33,17 @@ public class UserService implements IUserService{
         Long id = repository.save(user).getUserId();
         return id;
     }
+
+    @Override
+    public Long removeUser(Long userId) {
+        repository.deleteById(userId);
+        return userId;
+    }
+
+    @Override
+    public Long updateUser(User user) {
+        repository.deleteById(user.getUserId());
+        repository.save(user);
+        return user.getUserId();
+    }
 }

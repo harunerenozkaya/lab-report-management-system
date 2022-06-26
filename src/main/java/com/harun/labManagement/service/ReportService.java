@@ -58,6 +58,10 @@ public class ReportService implements IReportService{
     @Override
     public List<Report> getAllReportsByLaborantNSOrderedDesc(String name,String surname){return repository.getAllReportsByLaborantNSOrderedDesc(name,surname);}
 
+    @Override
+    public int getReportCountByLaborantID(Long userID) {
+        return repository.getReportCountByLaborantID(userID);
+    }
 
 
     @Override

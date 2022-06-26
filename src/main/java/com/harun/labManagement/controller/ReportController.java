@@ -157,13 +157,8 @@ public class ReportController {
     public String addReport(@ModelAttribute Report report, @RequestParam("diagnosis-img") MultipartFile multipartFile, Model model){
 
         try{
-            //If ID length is not 7
-            if(String.valueOf(report.getId()).length() != 7) {
-                model.addAttribute("status",false);
-                model.addAttribute("statusMessage","Report ID length must be 7 !");
-            }
             //If TC length is not 11
-            else if (String.valueOf(report.getPatientTC()).length() != 11) {
+            if (String.valueOf(report.getPatientTC()).length() != 11) {
                 model.addAttribute("status",false);
                 model.addAttribute("statusMessage","Patient TC length must be 11 !");
             }
