@@ -94,19 +94,37 @@ A few of the things users can do with Lab Report Management System:
 
 ## Build Process
 
-<!--
-- Follow the [React Native Guide](https://facebook.github.io/react-native/docs/getting-started.html) for getting started building a project with native code. **A Mac is required if you wish to develop for iOS.**
+
+- Create a PostgreSQL server
+
+<br/>
+
 - Clone or download the repo
-- `yarn` to install dependencies
-- `yarn run link` to link react-native dependencies
-- `yarn start:ios` to start the packager and run the app in the iOS simulator (`yarn start:ios:logger` will boot the application with [redux-logger](<https://github.com/evgenyrodionov/redux-logger>))
-- `yarn start:android` to start the packager and run the app in the the Android device/emulator (`yarn start:android:logger` will boot the application with [redux-logger](https://github.com/evgenyrodionov/redux-logger))
 
-Please take a look at the [contributing guidelines](./CONTRIBUTING.md) for a detailed process on how to build your application as well as troubleshooting information.
+<br/>
 
-**Development Keys**: The `CLIENT_ID` and `CLIENT_SECRET` in `api/index.js` are for development purposes and do not represent the actual application keys. Feel free to use them or use a new set of keys by creating an [OAuth application](https://github.com/settings/applications/new) of your own. Set the "Authorization callback URL" to `gitpoint://welcome`.
+- Configure src/main/resource/application.properties
+  * `spring.datasource.url = YOUR URL`
+  * `spring.datasource.username = YOUR USERNAME`
+  * `spring.datasource.password = YOUR PASSWORD`
+  
+<br/>
 
--->
+- Run the following command in a terminal window (in the complete) directory:
+  * `./mvnw spring-boot:run`
+
+<br/>
+
+- Open system
+  * For local usage : `localhost:8080`
+  
+<br/>
+
+- For initial login admin login informations :
+  * `username : 1000000`
+  * `password : admin`
+
+
 
 ## Technologies
 
