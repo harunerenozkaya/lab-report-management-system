@@ -312,6 +312,15 @@ public class ReportController {
         return "editReport";
     }
 
+    /**
+     * It returns the error.html page
+     *
+     * @return A string that is the name of the html file that is being returned.
+     */
+    @GetMapping("/error")
+    public String error(){
+        return "error";
+    }
 
 
     /**
