@@ -27,63 +27,63 @@ A few of the things users can do with Lab Report Management System:
 
 * Login With User ID and Password
 
-    <img src = "screenshots/login.png" width=400>
+    <img src = "screenshots/login.png" width=700>
 
 * View All Reports
 
-    <img src = "screenshots/allReports.png" width=400>
+    <img src = "screenshots/allReports.png" width=700>
 
 * Add New Report
 
-    <img src = "screenshots/addReport.png" width=400>
+    <img src = "screenshots/addReport.png" width=700>
 
 * View A Report
 
-    <img src = "screenshots/reportDetail.png" width=400>
+    <img src = "screenshots/reportDetail.png" width=700>
 
 * Update A Report
 
-    <img src = "screenshots/editReport.png" width=400>
+    <img src = "screenshots/editReport.png" width=700>
 
 * Delete A Report
 
-    <img src = "screenshots/deleteReport.png" width=400>
+    <img src = "screenshots/deleteReport.png" width=700>
 
 * Search Reports via Patient Name , Laborant Name , Patient TC
 
-    <img src = "screenshots/search1.png" width=200>
-    <img src = "screenshots/search2.png" width=200>
-    <img src = "screenshots/search3.png" width=200>
+    <img src = "screenshots/search1.png" width=700>
+    <img src = "screenshots/search2.png" width=700>
+    <img src = "screenshots/search3.png" width=700>
 
 * Sort Reports by Date
 
-    <img src = "screenshots/sortAscAllReports.png" width=400>
+    <img src = "screenshots/sortAscAllReports.png" width=700>
 
-    <img src = "screenshots/sortDescAllReports.png" width=400>
+    <img src = "screenshots/sortDescAllReports.png" width=700>
 
 * Attach A Image to Reports
 
-    <img src = "screenshots/attachImage.png" width=400>
+    <img src = "screenshots/attachImage.png" width=700>
 
 * View All System Users (Managers can perform only)
 
-    <img src = "screenshots/allUsers.png" width=400>
+    <img src = "screenshots/allUsers.png" width=700>
 
 * Add New System User (Managers can perform only)
 
-    <img src = "screenshots/addUser.png" width=400>
+    <img src = "screenshots/addUser.png" width=700>
 
 * View A System User (Managers can perform only)
 
-    <img src = "screenshots/userDetail.png" width=400>
+    <img src = "screenshots/userDetail.png" width=700>
 
 * Update A System User (Managers can perform only)
 
-    <img src = "screenshots/editUser.png" width=400>
+    <img src = "screenshots/editUser.png" width=700>
 
 * Delete A System User (Managers can perform only)
 
-    <img src = "screenshots/deleteUser.png" width=400>
+    <img src = "screenshots/deleteUser.png" width=700>
 
 
 ## System Requirements
@@ -117,6 +117,7 @@ Please take a look at the [contributing guidelines](./CONTRIBUTING.md) for a det
 - Maven
 - PostgreSQL
 - Javascript
+- Boostrap
 - HTML / CSS
 
 
