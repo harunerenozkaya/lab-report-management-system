@@ -2,6 +2,7 @@ package com.harun.labManagement.controller;
 
 import com.harun.labManagement.model.User;
 import com.harun.labManagement.service.IUserService;
+import com.harun.labManagement.util.IDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -56,7 +57,10 @@ public class UserController {
      */
     @GetMapping("/addUser")
     public String addUserPage(Model model){
-        model.addAttribute("user",new User());
+        User newUser = new User();
+        newUser.setUserId(IDGenerator.generateID(7));
+
+        model.addAttribute("user",newUser);
         return "addUser";
     }
 

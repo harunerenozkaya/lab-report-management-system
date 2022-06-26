@@ -6,6 +6,7 @@ import com.harun.labManagement.model.User;
 import com.harun.labManagement.service.IReportService;
 import com.harun.labManagement.service.IUserService;
 import com.harun.labManagement.util.FileUtil;
+import com.harun.labManagement.util.IDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -135,7 +136,11 @@ public class ReportController {
      */
     @GetMapping("/addReport")
     public String addReportPage(Model model){
-        model.addAttribute("report",new Report());
+        Report newReport = new Report();
+        newReport.setId(IDGenerator.generateID(7));
+
+        model.addAttribute("report",newReport);
+
         return "addReport";
     }
 
