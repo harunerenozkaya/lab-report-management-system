@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.harun.labManagement"},{"l":"com.harun.labManagement.controller"},{"l":"com.harun.labManagement.model"},{"l":"com.harun.labManagement.repository"},{"l":"com.harun.labManagement.security"},{"l":"com.harun.labManagement.service"},{"l":"com.harun.labManagement.util"}];updateSearchResults();

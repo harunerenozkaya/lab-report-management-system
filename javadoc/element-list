@@ -1,0 +1,7 @@
+com.harun.labManagement
+com.harun.labManagement.controller
+com.harun.labManagement.model
+com.harun.labManagement.repository
+com.harun.labManagement.security
+com.harun.labManagement.service
+com.harun.labManagement.util
