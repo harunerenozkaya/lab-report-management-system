@@ -4,7 +4,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-public class FileUploadUtil {
+public class FileUtil {
     /**
      * It takes a directory, a file name, and a multipart file as parameters, and then it creates the directory if it
      * doesn't exist, and then it copies the multipart file to the directory with the given file name
@@ -66,6 +65,13 @@ public class FileUploadUtil {
         return Files.exists(filePath);
     }
 
+    /**
+     * It deletes a file from a directory if it exists
+     *
+     * @param dir The directory where the file is located.
+     * @param fileName The name of the file to be deleted.
+     * @return A boolean value.
+     */
     public static boolean deleteFile(String dir,String fileName) throws IOException {
         Path filePath = Paths.get(dir + fileName);
 

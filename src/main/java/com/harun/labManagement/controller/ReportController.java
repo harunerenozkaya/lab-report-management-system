@@ -5,7 +5,7 @@ import com.harun.labManagement.model.Report;
 import com.harun.labManagement.model.User;
 import com.harun.labManagement.service.IReportService;
 import com.harun.labManagement.service.IUserService;
-import com.harun.labManagement.util.FileUploadUtil;
+import com.harun.labManagement.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -170,7 +170,7 @@ public class ReportController {
 
                 //Save image if it is not null
                 if(!multipartFile.isEmpty())
-                    FileUploadUtil.saveFile("reportPhotos/",report.getId().toString() + ".png",multipartFile);
+                    FileUtil.saveFile("reportPhotos/",report.getId().toString() + ".png",multipartFile);
 
                 //Add report
                 reportService.addReport(new Report(report.getId(), LocalDate.now(),report.getPatientName().trim(),report.getPatientSurname().trim(),report.getPatientTC(),report.getDiagnosisTitle().trim(),report.getDiagnosisDetail().trim(), currentUser.getUserId(), currentUser.getUserName().trim(), currentUser.getUserSurname().trim()));
@@ -209,7 +209,7 @@ public class ReportController {
         model.addAttribute("report",report);
 
         //Controls the whether report photo is exist , if exist show downloadn button
-        if(FileUploadUtil.isFileExist("reportPhotos/",reportId+".png"))
+        if(FileUtil.isFileExist("reportPhotos/",reportId+".png"))
             model.addAttribute("isImage",true);
 
         return "report";
@@ -224,7 +224,7 @@ public class ReportController {
     @GetMapping("/downloadImage/{reportId}")
     public void downloadReportImage(@PathVariable String reportId, HttpServletResponse response) throws IOException {
         response.setContentType("image/png");
-        response.getOutputStream().write(FileUploadUtil.getFile("reportPhotos/",reportId + ".png"));
+        response.getOutputStream().write(FileUtil.getFile("reportPhotos/",reportId + ".png"));
         response.getOutputStream().close();
     }
 
@@ -242,7 +242,7 @@ public class ReportController {
         reportService.removeReport(Long.parseLong(reportId));
 
         //Delete image
-        FileUploadUtil.deleteFile("reportPhotos/",reportId + ".png");
+        FileUtil.deleteFile("reportPhotos/",reportId + ".png");
 
         return "redirect:/reports";
     }
@@ -291,11 +291,11 @@ public class ReportController {
                 User currentUser = getCurrentUser();
 
                 //Delete old image
-                FileUploadUtil.deleteFile("reportPhotos/",report.getId().toString() + ".png");
+                FileUtil.deleteFile("reportPhotos/",report.getId().toString() + ".png");
 
                 //Save image if it is not empty
                 if(!multipartFile.isEmpty())
-                    FileUploadUtil.saveFile("reportPhotos/",report.getId().toString() + ".png",multipartFile);
+                    FileUtil.saveFile("reportPhotos/",report.getId().toString() + ".png",multipartFile);
 
                 //Edit report
                 reportService.updateReport(report.getId(),new Report(report.getId(), LocalDate.now(),report.getPatientName().trim(),report.getPatientSurname().trim(),report.getPatientTC(),report.getDiagnosisTitle().trim(),report.getDiagnosisDetail().trim(), currentUser.getUserId(), currentUser.getUserName().trim(), currentUser.getUserSurname().trim()));
